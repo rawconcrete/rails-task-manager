@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   # root "posts#index"
   get 'tasks', to: 'tasks#index'
   get 'tasks/:id', to: 'tasks#show', as: :task
+  get 'tasks/new', to: 'tasks#new', as: :new_task
+  post 'tasks', to: 'tasks#create'
   # reflects urls like /tasks/1 where :id represents unique task identifier
   # to tasks show routes requests to show action in tasks controller
   # as tasks creates general URL for specific task
