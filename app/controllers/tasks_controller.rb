@@ -37,7 +37,7 @@ class TasksController < ApplicationController
     # update task with form data
     if @task.update(task_params)
       # redirect to task details if update is successful
-      redirect_to task_path(@task), notice: 'task updated successfully.'
+      redirect_to task_path(@task), notice: 'task updated.'
     else
       # re-render edit form if update fails
       render :edit, status: :unprocessable_entity
@@ -48,7 +48,7 @@ class TasksController < ApplicationController
     # delete a task from database
     @task.destroy
     # redirect to task list with confirmation message
-    redirect_to tasks_path, notice: 'task successfully deleted.'
+    redirect_to tasks_path, notice: 'task deleted.'
   end
 
   private
