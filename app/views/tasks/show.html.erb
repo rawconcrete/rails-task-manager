@@ -30,6 +30,11 @@
 
   <!-- edit button -->
   <%= link_to 'edit task', task_path(@task, edit: true) %>
+
+  <!-- delete button with garbage can icon -->
+  <%= button_to delete_task_path(@task), method: :delete, data: { confirm: "are you sure you want to delete #{ @task.title.downcase }?" }, class: 'delete-task' do %>
+    🗑
+  <% end %>
 <% end %>
 
 <%= link_to 'back to tasks', tasks_path %>
