@@ -3,13 +3,15 @@
 
 <ul style="list-style-type: none; padding: 0;">
   <% @tasks.each do |task| %>
-    <li>
+    <li style="margin-bottom: 0.5rem;">
       <% if task.completed %>
         ✅
       <% else %>
         ⬜
       <% end %>
-      <%= link_to task.title, task_path(task) %>
+      <%= link_to task.title, task_path(task), style: "margin-left: 0.5rem;" %>
+      <!-- bin -->
+      <%= link_to '🗑', delete_task_path(task), method: :delete, data: { confirm: "are you sure you want to delete #{ task.title.downcase }?" }, style: "text-decoration: none; margin-left: 0.5rem;" %>
     </li>
   <% end %>
 </ul>
