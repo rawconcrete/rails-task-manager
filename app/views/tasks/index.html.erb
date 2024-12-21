@@ -2,11 +2,7 @@
 <ul style="list-style-type: none; padding: 0;">
   <% @tasks.each do |task| %>
     <li>
-      <% if task.completed %>
-        ✅ <%= task.title %>
-      <% else %>
-        ⬜ <%= task.title %>
-      <% end %>
+      <%= link_to task.title, task_path(task) %>
     </li>
   <% end %>
 </ul>
