@@ -1,20 +1,24 @@
 <h1>tasks</h1>
 <%= link_to 'add new task', new_task_path %>
 
-<ul class="tasks-list">
+<ul style="list-style-type: none; padding: 0;">
   <% @tasks.each do |task| %>
-    <li class="task-item">
-      <div class="task-content">
-        <% if task.completed %>
-          ✅
-        <% else %>
-          ⬜
-        <% end %>
-        <%= link_to task.title, task_path(task), class: "task-title" %>
-      </div>
-      <%= button_to delete_task_path(task), method: :delete, data: { confirm: "are you sure you want to delete #{ task.title.downcase }?" }, class: "delete-task" do %>
-        🗑
+    <li style="margin-bottom: 0.5rem;">
+      <% if task.completed %>
+        ✅
+      <% else %>
+        ⬜
       <% end %>
+      <%= link_to task.title, task_path(task), style: "margin-left: 0.5rem;" %>
+
+      <!-- Delete task form -->
+      <form action="<%= delete_task_path(task) %>" method="post" style="display: inline;">
+        <%= hidden_field_tag :_method, 'delete' %>
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <button type="submit" style="background: none; border: none; cursor: pointer; margin-left: 0.5rem;">
+          🗑
+        </button>
+      </form>
     </li>
   <% end %>
 </ul>
