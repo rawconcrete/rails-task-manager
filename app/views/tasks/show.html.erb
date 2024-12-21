@@ -1,40 +1,24 @@
 <h1>task details</h1>
 
 <% if params[:edit] %>
-  <!-- inline edit form -->
-  <%= form_with model: @task, local: true do |form| %>
-    <div>
-      <%= form.label :title %>
-      <%= form.text_field :title, value: @task.title.downcase %>
-    </div>
-
-    <div>
-      <%= form.label :details %>
-      <%= form.text_area :details, value: @task.details.downcase %>
-    </div>
-
-    <div>
-      <%= form.label :completed %>
-      <%= form.check_box :completed, checked: @task.completed %>
-    </div>
-
-    <%= form.submit 'save changes' %>
-  <% end %>
+  <!-- render shared form for editing task -->
+  <%= render 'form' %>
 <% else %>
-  <!-- task details -->
+  <!-- display task details -->
   <div>
     <p><strong>title:</strong> <%= @task.title.downcase %></p>
     <p><strong>details:</strong> <%= @task.details.downcase %></p>
     <p><strong>status:</strong> <%= @task.completed ? '✅ completed' : '⬜ incomplete' %></p>
   </div>
 
-  <!-- edit button -->
+  <!-- link to enable editing -->
   <%= link_to 'edit task', task_path(@task, edit: true) %>
 
-  <!-- delete button with garbage can icon -->
-  <%= button_to delete_task_path(@task), method: :delete, data: { confirm: "are you sure you want to delete #{ @task.title.downcase }?" }, class: 'delete-task' do %>
+  <!-- delete button -->
+  <%= button_to task_path(@task), method: :delete, data: { confirm: "are you sure you want to delete #{ @task.title.downcase }?" }, class: 'delete-task' do %>
     🗑
   <% end %>
 <% end %>
 
+<!-- link to return to task list -->
 <%= link_to 'back to tasks', tasks_path %>
