@@ -1,1 +1,12 @@
-<%# placeholder comment %>
+<h1><%= @task.title %></h1>
+<p><%= @task.details %></p>
+<p>
+  status:
+  <% if @task.completed %>
+    ✅ complete
+  <% else %>
+    ⬜ incomplete
+  <% end %>
+</p>
+
+<%= link_to 'return', tasks_path %>
