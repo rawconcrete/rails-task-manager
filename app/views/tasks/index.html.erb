@@ -1,7 +1,12 @@
-<h1>Tasks</h1>
+<h1>tasks</h1>
 <ul style="list-style-type: none; padding: 0;">
   <% @tasks.each do |task| %>
     <li>
+      <% if task.completed %>
+        ✅
+      <% else %>
+        ⬜
+      <% end %>
       <%= link_to task.title, task_path(task) %>
     </li>
   <% end %>
