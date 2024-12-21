@@ -28,4 +28,13 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
 
+  def update
+    @task = Task.find(params[:id])
+    if @task.update(task_params)
+      redirect_to task_path(@task), notice: 'task updated successfully.'
+    else
+      render :show, status: :unprocessable_entity
+    end
+  end
+
 end
