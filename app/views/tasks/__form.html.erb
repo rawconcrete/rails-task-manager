@@ -1,0 +1,25 @@
+<!-- shared form for new and edit actions -->
+<%= form_with model: @task, local: true do |form| %>
+  <div>
+    <!-- field for task title -->
+    <%= form.label :title %>
+    <%= form.text_field :title, required: true %>
+  </div>
+
+  <div>
+    <!-- field for task details -->
+    <%= form.label :details %>
+    <%= form.text_area :details %>
+  </div>
+
+  <% unless @task.new_record? %>
+    <div>
+      <!-- checkbox for marking task as completed -->
+      <%= form.label :completed %>
+      <%= form.check_box :completed %>
+    </div>
+  <% end %>
+
+  <!-- submit button -->
+  <%= form.submit %>
+<% end %>
