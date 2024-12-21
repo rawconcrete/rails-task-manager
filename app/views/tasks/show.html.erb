@@ -1,16 +1,35 @@
-<h1><%= @task.title %></h1>
-<%# display task title %>
-<p><%= @task.details %></p>
-<%# display task contents %>
-<p>
-  status:
-  <% if @task.completed %>
-    ✅ complete
-  <% else %>
-    ⬜ incomplete
-  <% end %>
-</p>
-<%# shows whether task is completed or not %>
+<h1>task details</h1>
 
-<%= link_to 'return', tasks_path %>
-<%# creates url to return to task list %>
+<% if params[:edit] %>
+  <!-- inline edit form -->
+  <%= form_with model: @task, local: true do |form| %>
+    <div>
+      <%= form.label :title %>
+      <%= form.text_field :title, value: @task.title.downcase %>
+    </div>
+
+    <div>
+      <%= form.label :details %>
+      <%= form.text_area :details, value: @task.details.downcase %>
+    </div>
+
+    <div>
+      <%= form.label :completed %>
+      <%= form.check_box :completed, checked: @task.completed %>
+    </div>
+
+    <%= form.submit 'save changes' %>
+  <% end %>
+<% else %>
+  <!-- task details -->
+  <div>
+    <p><strong>title:</strong> <%= @task.title.downcase %></p>
+    <p><strong>details:</strong> <%= @task.details.downcase %></p>
+    <p><strong>status:</strong> <%= @task.completed ? '✅ completed' : '⬜ incomplete' %></p>
+  </div>
+
+  <!-- edit button -->
+  <%= link_to 'edit task', task_path(@task, edit: true) %>
+<% end %>
+
+<%= link_to 'back to tasks', tasks_path %>
