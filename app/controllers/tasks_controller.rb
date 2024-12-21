@@ -1,46 +1,65 @@
 class TasksController < ApplicationController
+  # set @task for specific actions to reduce repetition
+  # before_action runs only for show, edit, update, and destroy
+  before_action :set_task, only: [:show, :edit, :update, :destroy]
+
   def index
+    # retrieve all tasks from database
     @tasks = Task.all
   end
 
   def show
-    @task = Task.find(params[:id])
+    # show details for one task
   end
 
   def new
-    @task = Task.new # create blank template
+    # create a blank task for the form
+    @task = Task.new
   end
 
   def create
+    # save a new task to the database using form data
     @task = Task.new(task_params)
     if @task.save
+      # redirect to task list if save is successful
       redirect_to tasks_path, notice: 'task saved. try not to overwork.'
     else
+      # re-render form if save fails
       render :new
     end
   end
 
-  def task_params
-    params.require(:task).permit(:title, :details, :completed)
-  end
-
   def edit
-    @task = Task.find(params[:id])
+    # edit an existing task
   end
 
   def update
-    @task = Task.find(params[:id])
+    # update task with form data
     if @task.update(task_params)
+      # redirect to task details if update is successful
       redirect_to task_path(@task), notice: 'task updated successfully.'
     else
-      render :show, status: :unprocessable_entity
+      # re-render edit form if update fails
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @task = Task.find(params[:id])
+    # delete a task from database
     @task.destroy
+    # redirect to task list with confirmation message
     redirect_to tasks_path, notice: 'task successfully deleted.'
   end
 
+  private
+
+  # find task by id for actions needing it
+  def set_task
+    @task = Task.find(params[:id])
+  end
+
+  # only allow specific parameters from form submission
+  def task_params
+    params.require(:task).permit(:title, :details, :completed)
+  end
 end
