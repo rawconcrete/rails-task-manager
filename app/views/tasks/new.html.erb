@@ -1,21 +1,7 @@
 <h1>new task</h1>
 
-<%= form_with model: @task, local: true do |form| %>
-  <div>
-    <%= form.label :title %>
-    <%= form.text_field :title, required: true %>
-  </div>
+<!-- render shared form for new task -->
+<%= render 'form' %>
 
-  <div>
-    <%= form.label :details %>
-    <%= form.text_area :details %>
-  </div>
-
-  <div>
-    <%= form.hidden_field :completed, value: false %>
-  </div>
-
-  <%= form.submit 'Create Task' %>
-<% end %>
-
+<!-- link to return to task list -->
 <%= link_to 'return', tasks_path %>
