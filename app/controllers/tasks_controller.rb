@@ -13,8 +13,15 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
-    @task.save
-    redirect_to tasks_path
+    if @task.save
+      redirect_to tasks_path, notice: 'task saved. try not to overwork.'
+    else
+      render :new
+    end
+  end
+
+  def task_params
+    params.require(:task).permit(:title, :details, :completed)
   end
 
 end
