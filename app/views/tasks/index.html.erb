@@ -1,17 +1,20 @@
 <h1>tasks</h1>
 <%= link_to 'add new task', new_task_path %>
 
-<ul style="list-style-type: none; padding: 0;">
+<ul class="tasks-list">
   <% @tasks.each do |task| %>
-    <li style="margin-bottom: 0.5rem;">
-      <% if task.completed %>
-        ✅
-      <% else %>
-        ⬜
+    <li class="task-item">
+      <div class="task-content">
+        <% if task.completed %>
+          ✅
+        <% else %>
+          ⬜
+        <% end %>
+        <%= link_to task.title, task_path(task), class: "task-title" %>
+      </div>
+      <%= button_to delete_task_path(task), method: :delete, data: { confirm: "are you sure you want to delete #{ task.title.downcase }?" }, class: "delete-task" do %>
+        🗑
       <% end %>
-      <%= link_to task.title, task_path(task), style: "margin-left: 0.5rem;" %>
-      <!-- bin -->
-      <%= link_to '🗑', delete_task_path(task), method: :delete, data: { confirm: "are you sure you want to delete #{ task.title.downcase }?" }, style: "text-decoration: none; margin-left: 0.5rem;" %>
     </li>
   <% end %>
 </ul>
