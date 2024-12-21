@@ -1,5 +1,7 @@
 <h1><%= @task.title %></h1>
+<%# display task title %>
 <p><%= @task.details %></p>
+<%# display task contents %>
 <p>
   status:
   <% if @task.completed %>
@@ -8,5 +10,7 @@
     ⬜ incomplete
   <% end %>
 </p>
+<%# shows whether task is completed or not %>
 
 <%= link_to 'return', tasks_path %>
+<%# creates url to return to task list %>
