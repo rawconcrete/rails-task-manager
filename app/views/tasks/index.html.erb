@@ -1,12 +1,10 @@
 <h1>Tasks</h1>
-<ul>
+<ul style="list-style-type: none; padding: 0;">
   <% @tasks.each do |task| %>
     <li>
       <% if task.completed %>
-        <!-- checked box for completed tasks -->
         ✅ <%= task.title %>
       <% else %>
-        <!-- empty box for incomplete tasks -->
         ⬜ <%= task.title %>
       <% end %>
     </li>
